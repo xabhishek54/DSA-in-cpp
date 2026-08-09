@@ -3,9 +3,9 @@ using namespace std;
 
 void explainPair();
 void explainVector();
-
+void sorting();
 int main(){
-    explainVector();
+    sorting();
 }
 
 //pairs
@@ -56,4 +56,39 @@ void explainVector(){
      }
 
 
+}
+
+//comparator
+bool comp(pair<int,int> p1,pair<int,int> p2){
+    if (p1.second<p2.second) return true;
+    if (p1.second>p2.second) return false;
+    
+    //then it is same
+    if (p1.first>p2.first) return true;
+    return false;
+}
+
+void sorting(){
+    int a[]={4,2,9,2,1,10,20};
+    sort(a+1,a+5);
+    for(int i=0;i<sizeof(a)/sizeof(a[0]);i++){
+        cout<<a[i]<<" ";
+    }
+    pair<int,int> p[]={{1,2},{2,1},{4,1}};
+    sort(p,p+4,comp);
+    for(int i=0;i<sizeof(p)/sizeof(p[0]);i++){
+        cout<<"("<<p[i].first<<","<<p[i].second<<"), ";
+    }
+
+    cout<<"\n";
+    cout<<__builtin_popcount(7);
+    cout<<"\n";
+    
+    //permutations
+    string s="231";
+    sort(s.begin(),s.end());
+    do{
+        cout<<s<<'\n';
+    }while(next_permutation(s.begin(),s.end()));
+    
 }
