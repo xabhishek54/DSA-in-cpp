@@ -5,8 +5,8 @@ void recursionPrint(int i){
         return;
     }
     else{
-        recursionPrint(i-1);
         cout<<i<<'\n';
+        recursionPrint(i-1);
     }
 }
 
