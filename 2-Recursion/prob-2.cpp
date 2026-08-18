@@ -17,8 +17,19 @@ void sum_para(int a,int sum){
     sum_para(a-1,sum+a);
 }
 
+int fact(int a){
+    if (a==0){
+        return 1;
+    }
+    return a * fact(a-1);
 
+}
 int main(){
     cout<<sum_Recursion(5)<<'\n';
     sum_para(5,0);
+    cout<<'\n'<<fact(5);
 }
+
+
+//Time complexity =O(N)
+//Space complexit =O(N) as its a stack space
