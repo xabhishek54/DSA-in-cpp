@@ -129,3 +129,65 @@ end procedure
 ### Advantages & Disadvantages
 * **Pro (Adaptive & Stable):** It is highly efficient for collections that are already sorted or nearly sorted, achieving a best-case runtime of O(n). It preserves the relative placement of duplicate items (stable).
 * **Con (Heavy Memory Writes):** Unlike selection sort, bubble sort writes to memory continuously via frequent adjacent swaps, making it highly inefficient on large datasets or systems where writing to memory is expensive.
+
+
+# Insertion Sort
+
+**Insertion sort** is a simple, **in-place comparison sorting algorithm**. It works similarly to the way you sort playing cards in your hands: the array is virtually split into a sorted and an unsorted part, and values from the unsorted part are picked and placed into the correct position in the sorted part.
+
+### How Insertion Sort Works
+The algorithm builds the final sorted array one item at a time by shifting elements out of the way to insert the current item.
+
+* **Pick the Element:** It loops from the second element (index 1) to the end of the array, picking one element at a time to insert.
+* **Scan Backward:** It compares the picked element with the elements to its left (the sorted sub-array).
+* **Swap/Shift:** If the picked element is smaller than the item on its left, they swap places. This continues backward until it reaches a value smaller than itself or hits the beginning of the list.
+* **Repeat** for all remaining unsorted items.
+
+```text
+Initial Array:
+
+Pass 1: Pick 10. Compare with 29. Swap.
+        [10, 29 | 14, 37, 13]
+Pass 2: Pick 14. Compare with 29. Swap. Compare with 10. Stop.
+        [10, 14, 29 | 37, 13]
+Pass 3: Pick 37. Compare with 29. Stop (already greater).
+        [10, 14, 29, 37 | 13]
+Pass 4: Pick 13. Compare and shift backward until placed between 10 and 14.
+        [10, 13, 14, 29, 37] (Sorted!)
+```
+
+### Algorithm Complexity & Properties
+
+| Metric / Property | Complexity / Behavior | Description |
+| :--- | :--- | :--- |
+| **Best-Case Time** | O(n) | Happens when the array is already fully sorted (no swaps occur). |
+| **Average-Case Time** | O(n²) | Requires scanning and shifting elements on average. |
+| **Worst-Case Time** | O(n²) | Happens when the array is sorted in reverse order. |
+| **Space Complexity** | O(1) | In-place algorithm; does not require extra memory allocations. |
+| **Stability** | **Stable** | Does not change the relative order of duplicate elements. |
+| **Data Structure** | Array / List | Exceptionally fast for small or nearly sorted datasets. |
+
+### Pseudocode
+```text
+procedure insertionSort(list A)
+    n = length(A)
+    
+    # Outer loop starts at index 1 as the first element is already "sorted"
+    for i from 1 to n - 1 do
+        # Inner loop steps backward from the current index i down to 1
+        for j from i down to 1 do
+            # Compare current element with its left neighbor
+            if A[j] < A[j - 1] then
+                swap(A[j], A[j - 1])
+            else
+                # If it's already in the correct place, break early for this pass
+                break
+            end if
+        end for
+    end for
+end procedure
+```
+
+### Advantages & Disadvantages
+* **Pro (Highly Adaptive):** Like Bubble Sort, it is extremely efficient for nearly sorted data, running in O(n) time. It also features very low overhead, outperforming more complex algorithms (like Quicksort) on small array sizes.
+* **Con (High Shifting Cost):** Because elements must be swapped step-by-step to the left, it performs a high number of operations on completely unsorted or reversed large datasets.
